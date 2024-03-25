@@ -7,9 +7,9 @@ export const LatestListings = async () => {
     const listings: TListing[] = await getLatestListings();
 
     return (
-        <div>
+        <div className="p-4 flex flex-wrap gap-4">
             {listings.map((x) => (
-                <ListingCard key={x._id} />
+                <ListingCard key={x._id} listing={x} />
             ))}
         </div>
     );

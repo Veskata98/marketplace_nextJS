@@ -8,6 +8,7 @@ import { dbConnect } from '@/lib/db';
 import Listing from '@/models/Listing';
 
 import { TListing } from '@/types';
+import { revalidatePath } from 'next/cache';
 
 const listingSchema = z.object({
     title: z.string(),
@@ -20,7 +21,7 @@ const listingSchema = z.object({
 const getLatestListings = async () => {
     await dbConnect();
 
-    const listings = await Listing.find().lean();
+    const listings = (await Listing.find().lean()).map((x: any) => ({ ...x, _id: x._id.toString() }));
     return listings as TListing[];
 };
 
@@ -39,6 +40,8 @@ const createListing = async (data: FormData) => {
         await dbConnect();
         await Listing.create({ ...result, creatorId: user.id });
 
+        revalidatePath('/');
+
         return {
             message: 'success',
         };
@@ -47,4 +50,36 @@ const createListing = async (data: FormData) => {
     }
 };
 
-export { createListing, getLatestListings };
+const getMyListings = async (userId: string) => {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    if (!user) {
+        return redirect('/api/auth/login?post_login_redirect_url=%2F');
+    }
+
+    if (user.id !== userId) {
+        return redirect('/');
+    }
+
+    try {
+        await dbConnect();
+        const listings = (await Listing.find({ creatorId: userId }).lean()).map((x: any) => ({
+            ...x,
+            _id: x._id.toString(),
+        }));
+
+        return {
+            message: 'success',
+            data: listings as TListing[],
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            message: 'error',
+            data: [],
+        };
+    }
+};
+
+export { createListing, getLatestListings, getMyListings };

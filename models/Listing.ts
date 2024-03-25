@@ -11,6 +11,10 @@ const listingSchema = new Schema({
         required: true,
         minlength: [10, 'Description must be at least 10 characters'],
     },
+    category: {
+        type: String,
+        required: true,
+    },
     price: {
         type: Number,
         required: true,

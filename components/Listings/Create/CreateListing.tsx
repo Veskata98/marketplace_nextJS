@@ -7,13 +7,23 @@ import { createListing } from '@/acions/listingActions';
 
 import { SubmitButton } from '@/components/SubmitButton';
 import { Categories } from '@/types';
+import { useRouter } from 'next/navigation';
 
 export const CreateListing = () => {
     const [imagePreview, setImagePreview] = useState<File | null>();
     const formRef = useRef<HTMLFormElement>(null);
+    const router = useRouter();
 
     return (
-        <form ref={formRef} className="w-full max-w-lg  p-8 rounded-lg" action={createListing}>
+        <form
+            ref={formRef}
+            className="w-full max-w-lg  p-8 rounded-lg"
+            action={async (formData: FormData) => {
+                await createListing(formData);
+                formRef?.current?.reset();
+                router.push('/');
+            }}
+        >
             <h1 className="text-2xl font-bold mb-4 text-center">Create a New Listing</h1>
             <div className="mb-8 flex flex-col gap-4 text-white">
                 <div>

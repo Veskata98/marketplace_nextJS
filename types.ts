@@ -2,9 +2,10 @@ export type TListing = {
     _id: string;
     title: string;
     category: string;
-    image: string;
+    imageUrl: string;
     price: number;
     description: string;
+    creatorId: string;
 };
 
 export enum Categories {

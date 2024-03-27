@@ -19,9 +19,9 @@ const listingSchema = new Schema({
         type: Number,
         required: true,
     },
-    image: {
-        data: Buffer,
-        contentType: String,
+    imageUrl: {
+        type: String,
+        required: true,
     },
     creatorId: {
         type: String,

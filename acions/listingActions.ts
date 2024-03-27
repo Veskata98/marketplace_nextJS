@@ -15,7 +15,6 @@ const listingSchema = z.object({
     price: z.number().gt(0),
     description: z.string(),
     category: z.string(),
-    image: z.instanceof(File),
 });
 
 const getLatestListings = async () => {
@@ -25,7 +24,7 @@ const getLatestListings = async () => {
     return listings as TListing[];
 };
 
-const createListing = async (data: FormData) => {
+const createListing = async (data: FormData, imageId: string) => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -34,11 +33,13 @@ const createListing = async (data: FormData) => {
     }
 
     try {
-        const { image, title, price, description, category } = Object.fromEntries(data);
-        const result = listingSchema.parse({ image, title, price: Number(price), description, category });
+        const { title, price, description, category } = Object.fromEntries(data);
+        const result = listingSchema.parse({ title, price: Number(price), description, category });
+
+        const imageUrl = imageId !== '' ? `https://ucarecdn.com/${imageId}/` : '';
 
         await dbConnect();
-        await Listing.create({ ...result, creatorId: user.id });
+        await Listing.create({ ...result, creatorId: user.id, imageUrl });
 
         revalidatePath('/');
 

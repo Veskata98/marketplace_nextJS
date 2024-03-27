@@ -26,3 +26,10 @@ body {
         text-wrap: balance;
     }
 }
+
+.my-config {
+    --darkmode: 0;
+    --h-accent: 46;
+    --s-accent: 73%;
+    --l-accent: 58%;
+}

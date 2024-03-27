@@ -24,12 +24,14 @@ export const ListingCard = ({ listing }: ListingCardProps) => {
             <div className="rounded shadow-md overflow-hidden w-72 cursor-pointer">
                 <div className="relative h-48">
                     {imageError ? (
-                        <Image src={brokenImg} alt={listing.title} className="w-full h-48 object-cover" />
+                        <Image src={brokenImg} alt={listing.title} className="w-full h-full object-cover" />
                     ) : (
                         <Image
-                            src={listing.image || brokenImg}
+                            src={listing.imageUrl}
                             alt={listing.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain object-center"
+                            width={288}
+                            height={192}
                             onError={handleImageError}
                         />
                     )}

@@ -11,14 +11,14 @@ export const Header = async () => {
 
     return (
         <div className="bg-amber-300 w-full h-16 flex items-center justify-between px-8">
-            <Link href="/" className="text-2xl text-gray-800 font-semibold">
+            <Link href="/" className="text-2xl font-semibold text-zinc-800 hover:text-zinc-600">
                 Let&apos;Sell
             </Link>
             <ul className="flex items-center justify-end space-x-4 font-semibold">
                 {!user ? (
                     <>
                         <li>
-                            <LoginLink postLoginRedirectURL="/" className="text-zinc-800 hover:text-zinc-900 ">
+                            <LoginLink className="text-zinc-800 hover:text-zinc-600" postLoginRedirectURL="/">
                                 Sign In
                             </LoginLink>
                         </li>
@@ -34,12 +34,12 @@ export const Header = async () => {
                 ) : (
                     <>
                         <li>
-                            <Link href="/create" className="text-gray-800 hover:text-gray-900 ">
+                            <Link className="text-zinc-800 hover:text-zinc-600" href="/create">
                                 Add Listing
                             </Link>
                         </li>
                         <li>
-                            <Link href="/messages" className="text-gray-800 hover:text-gray-900  flex items-center">
+                            <Link className="text-zinc-800 hover:text-zinc-600 flex items-center" href="/messages">
                                 {/* {notifications !== 0 && (
                                     <span className="bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full mr-1">
                                         {notifications}
@@ -51,7 +51,8 @@ export const Header = async () => {
                         <li>
                             <Link
                                 href={`/profile/${user?.id}`}
-                                className="flex gap-2 items-center justify-center"
+                                className="flex gap-2 items-center justify-center
+                                text-zinc-800 hover:text-zinc-600"
                                 title="My Profile"
                             >
                                 <Image
@@ -61,11 +62,11 @@ export const Header = async () => {
                                     height={32}
                                     className="rounded-full"
                                 />
-                                <span className="text-zinc-600 hover:text-zinc-500">{user.given_name}</span>
+                                <span>{user.given_name}</span>
                             </Link>
                         </li>
                         <li>
-                            <LogoutLink className="text-zinc-600 hover:text-zinc-500" postLogoutRedirectURL="/">
+                            <LogoutLink className="text-zinc-800 hover:text-zinc-600" postLogoutRedirectURL="/">
                                 Log Out
                             </LogoutLink>
                         </li>

@@ -6,6 +6,7 @@ export type TListing = {
     price: number;
     description: string;
     creatorId: string;
+    createdAt: string;
 };
 
 export enum Categories {

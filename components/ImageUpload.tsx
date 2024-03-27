@@ -43,7 +43,7 @@ export const ImageUpload = ({ handleImageUpload }: ImageUploadProps) => {
     return (
         <>
             {imagePreview && (
-                <div className="flex justify-center items-center py-4 h-72">
+                <div className="flex flex-col justify-center items-center pt-2 pb-4">
                     <Image
                         src={URL.createObjectURL(imagePreview)}
                         alt="Preview"

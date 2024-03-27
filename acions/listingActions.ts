@@ -2,13 +2,14 @@
 
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+
 import { z } from 'zod';
 
 import { dbConnect } from '@/lib/db';
 import Listing from '@/models/Listing';
 
 import { TListing } from '@/types';
-import { revalidatePath } from 'next/cache';
 
 const listingSchema = z.object({
     title: z.string(),

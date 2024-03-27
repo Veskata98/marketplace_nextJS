@@ -5,13 +5,13 @@ import { TListing } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArrowLeft, Edit, Trash } from 'lucide-react';
+import { Edit, Trash } from 'lucide-react';
 import brokenImg from '@/assets/images/broken-img.png';
 
 import { dbConnect } from '@/lib/db';
 import Listing from '@/models/Listing';
 
-import { capitalizeString } from '@/lib/utils';
+import { ReturnButton } from '@/components/ReturnButton';
 
 export default async function page({ params }: { params: { listingId: string } }) {
     const { getUser } = getKindeServerSession();
@@ -22,10 +22,7 @@ export default async function page({ params }: { params: { listingId: string } }
 
     return (
         <div className="w-2/5 mx-auto pt-10 p-4 rounded-lg overflow-hidden relative">
-            <Link href={`/${listing.category}`} className="absolute top-2 left-0 hover:underline flex gap-x-2">
-                <ArrowLeft />
-                Return to {capitalizeString(listing.category)}
-            </Link>
+            <ReturnButton className="absolute top-2 left-0 hover:underline flex gap-x-2" />
             <div className="w-full bg-zinc-700">
                 <Image
                     src={listing.imageUrl || brokenImg}

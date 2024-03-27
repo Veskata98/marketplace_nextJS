@@ -19,7 +19,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Header />
-                <main>{children}</main>
+                <main style={{ height: 'calc(100% - 4rem)' }}>{children}</main>
             </body>
         </html>
     );

@@ -1,13 +1,13 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { createListing } from '@/acions/listingActions';
 
-import { SubmitButton } from '@/components/SubmitButton';
 import { Categories } from '@/types';
-import { useRouter } from 'next/navigation';
+
+import { SubmitButton } from '@/components/SubmitButton';
 import { ImageUpload } from '@/components/ImageUpload';
 
 export const CreateListing = () => {
@@ -21,7 +21,7 @@ export const CreateListing = () => {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <h1 className="text-2xl font-bold mb-4 text-center">Create a New Listing</h1>
+            <h1 className="text-2xl font-bold my-2 text-center">Create a New Listing</h1>
             <ImageUpload handleImageUpload={handleImageUpload} />
             <form
                 ref={formRef}
@@ -81,8 +81,8 @@ export const CreateListing = () => {
                 </div>
                 <SubmitButton
                     className="cursor-pointer text-zinc-800 font-semibold 
-                disabled:text-zinc-600 disabled:cursor-default 
-                disabled:bg-slate-300 w-full bg-amber-300 hover:bg-amber-300/90 p-2 rounded"
+                    disabled:text-zinc-600 disabled:cursor-default 
+                    disabled:bg-slate-300 w-full bg-amber-300 hover:bg-amber-300/90 p-2 rounded"
                 >
                     Create listing
                 </SubmitButton>

@@ -12,8 +12,9 @@ import { dbConnect } from '@/lib/db';
 import Listing from '@/models/Listing';
 
 import { ReturnButton } from '@/components/ReturnButton';
+import { capitalizeString } from '@/lib/utils';
 
-export default async function page({ params }: { params: { listingId: string } }) {
+export default async function ListingIdPage({ params }: { params: { listingId: string } }) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -46,12 +47,10 @@ export default async function page({ params }: { params: { listingId: string } }
                         </div>
                     )}
                 </div>
-                <div className="text-zinc-300 text-sm mb-4 italic">
-                    {listing.category && typeof listing.category === 'string' && (
-                        <Link href={`/${listing.category}`} className="hover:text-orange-400 transition-colors">
-                            {listing.category}
-                        </Link>
-                    )}
+                <div className="text-zinc-300 text-sm mb-4">
+                    <Link href={`/categories/${listing.category}`} className="hover:text-orange-400 transition-colors">
+                        {capitalizeString(listing.category)}
+                    </Link>
                 </div>
 
                 <p className="shadow-inner bg-zinc-500 min-h-[150px] rounded px-4 py-2 mb-4">{listing.description}</p>

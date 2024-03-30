@@ -1,4 +1,9 @@
+import { Categories } from '@/types';
 import { Schema, model, Types, models } from 'mongoose';
+
+function validateCategory(value: string) {
+    return Object.values(Categories).includes(value as Categories);
+}
 
 const listingSchema = new Schema({
     title: {
@@ -14,6 +19,10 @@ const listingSchema = new Schema({
     category: {
         type: String,
         required: true,
+        validate: {
+            validator: validateCategory,
+            message: 'Invalid category',
+        },
     },
     price: {
         type: Number,

@@ -14,7 +14,7 @@ export const ReturnButton = ({ className }: ReturnButtonProps) => {
     return (
         <button onClick={router.back} className={className}>
             <ArrowLeft />
-            Return
+            Back
         </button>
     );
 };

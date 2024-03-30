@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { createListing } from '@/acions/listingActions';
 
-import { Categories } from '@/types';
+import { CATEGORIES, Categories } from '@/types';
 
 import { SubmitButton } from '@/components/SubmitButton';
 import { ImageUpload } from '@/components/ImageUpload';
@@ -52,10 +52,19 @@ export const CreateListing = () => {
                             text-zinc-700"
                             name="category"
                         >
-                            {Object.entries(Categories).map((category) => (
-                                <option key={category[0]} value={category[1]}>
+                            {/* {Object.entries(Categories).map((category) => (
+                                <option className="font-sans" key={category[0]} value={category[1]}>
                                     {category[0]}
                                 </option>
+                            ))} */}
+                            {Object.entries(CATEGORIES).map(([category, subcategories]) => (
+                                <optgroup label={category.replaceAll('_', ' ')} key={category}>
+                                    {Object.entries(subcategories).map(([label, value]) => (
+                                        <option value={label} key={label} className="font-sans">
+                                            {value}
+                                        </option>
+                                    ))}
+                                </optgroup>
                             ))}
                         </select>
                     </div>

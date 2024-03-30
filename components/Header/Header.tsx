@@ -11,7 +11,7 @@ export const Header = async () => {
 
     return (
         <div className="bg-amber-300 w-full h-16 flex items-center justify-between px-8">
-            <Link href="/" className="text-2xl font-semibold text-zinc-800 hover:text-zinc-600">
+            <Link href="/" className="text-2xl font-semibold text-zinc-800">
                 Let&apos;Sell
             </Link>
             <ul className="flex items-center justify-end space-x-4 font-semibold">

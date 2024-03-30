@@ -4,7 +4,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
     return (
         <div className="flex">
             <Sidebar />
-            <div className="p-4">{children}</div>
+            <div className="p-4 w-full">{children}</div>
         </div>
     );
 }

@@ -1,11 +1,11 @@
 'use server';
 
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { z } from 'zod';
 
+import { getUserServerComponent } from '@/lib/user';
 import { dbConnect } from '@/lib/db';
 import Listing from '@/models/Listing';
 
@@ -26,8 +26,7 @@ const getLatestListings = async () => {
 };
 
 const createListing = async (data: FormData, imageId: string) => {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+    const user = await getUserServerComponent();
 
     if (!user) {
         return redirect('/api/auth/login?post_login_redirect_url=%2F');
@@ -53,8 +52,7 @@ const createListing = async (data: FormData, imageId: string) => {
 };
 
 const getMyListings = async (userId: string) => {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+    const user = await getUserServerComponent();
 
     if (!user) {
         return redirect('/api/auth/login?post_login_redirect_url=%2F');

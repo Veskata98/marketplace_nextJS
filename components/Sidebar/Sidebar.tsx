@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { CATEGORIES } from '@/types';
 import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export const Sidebar = () => {
     const url = usePathname();
@@ -19,7 +20,10 @@ export const Sidebar = () => {
                             <Link
                                 key={key}
                                 href={`/categories/${key}`}
-                                className={activeCategory === key ? 'pointer-events-none' : ''}
+                                className={cn(
+                                    'hover:text-zinc-400',
+                                    activeCategory === key ? 'pointer-events-none bg-amber-200' : ''
+                                )}
                             >
                                 <li className="p-2">
                                     {value}
